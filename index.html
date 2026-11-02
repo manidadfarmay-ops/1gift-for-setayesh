@@ -1,368 +1,80 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>برای ستایش 🤍</title>
-
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #fff, #fff4f8);
-      font-family: sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding: 25px;
-      text-align: center;
-    }
-
-    /* مرحله ۱ */
-    #stage1 {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .envelope {
-      width: 270px;
-      height: 180px;
-      background: white;
-      border: 3px solid #f5b6cd;
-      border-radius: 15px;
-      position: relative;
-      box-shadow: 0 10px 35px rgba(220,130,165,.18);
-      transition: .8s;
-    }
-
-    .envelope::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: #ffe5ef;
-      clip-path: polygon(0 0,50% 70%,100% 0);
-      border-radius: 12px 12px 0 0;
-      transition: .8s;
-      transform-origin: top;
-    }
-
-    .envelope.opening::before {
-      transform: rotateX(180deg);
-    }
-
-    .name {
-      position: absolute;
-      top: 105px;
-      width: 100%;
-      font-size: 22px;
-      color: #d982a8;
-      font-weight: bold;
-    }
-
-    button {
-      margin-top: 30px;
-      border: none;
-      background: #f7bfd4;
-      color: white;
-      padding: 13px 28px;
-      border-radius: 30px;
-      font-size: 17px;
-      cursor: pointer;
-      box-shadow: 0 5px 18px rgba(220,130,165,.25);
-    }
-
-    /* مرحله ۲ */
-    .stage {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h2 {
-      color: #d982a8;
-      font-size: 22px;
-      margin-bottom: 35px;
-    }
-
-    .stars {
-      display: grid;
-      grid-template-columns: repeat(5,1fr);
-      gap: 15px;
-      width: 100%;
-      max-width: 330px;
-    }
-
-    .star {
-      font-size: 38px;
-      cursor: pointer;
-      transition: transform .25s;
-      user-select: none;
-    }
-
-    .star.wrong {
-      animation: shake .35s;
-    }
-
-    .star.correct {
-      animation: correctStar .8s forwards;
-    }
-
-    /* مرحله ۳ */
-    .box {
-      width: 270px;
-      height: 190px;
-      background: white;
-      border: 3px solid #f5b6cd;
-      border-radius: 18px;
-      box-shadow: 0 10px 35px rgba(220,130,165,.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .lock {
-      font-size: 48px;
-      transition: .4s;
-    }
-
-    .lock.unlocked {
-      transform: scale(1.25);
-    }
-
-    .lock.shake {
-      animation: shake .4s;
-    }
-
-    .symbols {
-      display: flex;
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .symbol {
-      font-size: 42px;
-      cursor: pointer;
-      transition: .25s;
-      user-select: none;
-    }
-
-    .symbol:active {
-      transform: scale(.8);
-    }
-
-    .small-text {
-      color: #c989a5;
-      font-size: 15px;
-      margin-top: 18px;
-    }
-
-    @keyframes shake {
-      0%,100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
-    }
-
-    @keyframes correctStar {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.7); }
-      100% { transform: scale(1.35); }
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="page">
-
-  <!-- مرحله ۱ -->
-  <div id="stage1">
-    <div class="envelope" id="envelope">
-      <div class="name">برای ستایش 🤍</div>
-    </div>
-
-    <button id="openBtn">✨ بازش کن</button>
-  </div>
-
-  <!-- مرحله ۲ -->
-  <div id="stage2" class="stage">
-    <h2>خب… اولین قدم رو پیدا کن ✨</h2>
-
-    <div class="stars">
-      <div class="star">⭐</div>
-      <div class="star">⭐</div>
-      <div class="star" data-correct="true">⭐</div>
-      <div class="star">⭐</div>
-      <div class="star">⭐</div>
-    </div>
-
-    <div class="small-text">
-      یکی‌شون یه کم با بقیه فرق داره… 👀
-    </div>
-  </div>
-
-  <!-- مرحله ۳ -->
-  <div id="stage3" class="stage">
-
-    <h2>فکر کنم اینجا یه چیزی منتظرته…</h2>
-
-    <div class="box">
-      <div id="lock" class="lock">🔒</div>
-    </div>
-
-    <div class="small-text">
-      ولی هنوز وقتش نرسیده 🤍
-    </div>
-
-    <div class="symbols">
-
-      <div class="symbol" data-symbol="flower">🌸</div>
-
-      <div class="symbol" data-symbol="star">⭐</div>
-
-      <div class="symbol" data-symbol="heart">🩷</div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-
-  const stage1 = document.getElementById("stage1");
-  const stage2 = document.getElementById("stage2");
-  const stage3 = document.getElementById("stage3");
-
-  const envelope = document.getElementById("envelope");
-  const openBtn = document.getElementById("openBtn");
-
-  /* مرحله ۱ → ۲ */
-
-  openBtn.addEventListener("click", () => {
-
-    envelope.classList.add("opening");
-
-    openBtn.textContent = "✨ آماده شد";
-
-    setTimeout(() => {
-
-      stage1.style.display = "none";
-      stage2.style.display = "flex";
-
-    }, 1000);
-
-  });
-
-
-  /* مرحله ۲ */
-
-  const stars = document.querySelectorAll(".star");
-
-  stars.forEach(star => {
-
-    star.addEventListener("click", () => {
-
-      if (star.dataset.correct === "true") {
-
-        star.classList.add("correct");
-
-        setTimeout(() => {
-
-          stage2.style.display = "none";
-          stage3.style.display = "flex";
-
-        }, 900);
-
-      } else {
-
-        star.classList.add("wrong");
-
-        setTimeout(() => {
-
-          star.classList.remove("wrong");
-
-        }, 400);
-
-      }
-
-    });
-
-  });
-
-
-  /* مرحله ۳ */
-
-  const symbols = document.querySelectorAll(".symbol");
-  const lock = document.getElementById("lock");
-
-  const correctSequence = ["flower","star","heart"];
-
-  let selectedSequence = [];
-
-
-  symbols.forEach(symbol => {
-
-    symbol.addEventListener("click", () => {
-
-      selectedSequence.push(symbol.dataset.symbol);
-
-      if (selectedSequence.length === 3) {
-
-        const correct =
-          selectedSequence.every(
-            (value,index) =>
-            value === correctSequence[index]
-          );
-
-        if (correct) {
-
-          lock.classList.add("unlocked");
-
-          setTimeout(() => {
-
-            alert("قفل باز شد 🤍");
-
-          },500);
-
-        } else {
-
-          lock.classList.add("shake");
-
-          setTimeout(() => {
-
-            lock.classList.remove("shake");
-            selectedSequence = [];
-
-          },500);
-
-        }
-
-      }
-
-    });
-
-  });
-
-</script>
-
-</body>
-</html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>برای ستایش 🤍</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+min-height:100vh;
+background:linear-gradient(135deg,#fff,#fff4f8);
+font-family:sans-serif;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.page{
+width:100%;
+max-width:430px;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+padding:25px;
+text-align:center;
+}
+
+.stage{
+display:none;
+width:100%;
+flex-direction:column;
+align-items:center;
+}
+
+#stage1{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.envelope{
+width:270px;
+height:180px;
+background:white;
+border:3px solid #f5b6cd;
+border-radius:15px;
+position:relative;
+box-shadow:0 10px 35px rgba(220,130,165,.18);
+transition:.8s;
+}
+
+.envelope::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100px;
+background:#ffe5ef;
+clip-path:polygon(0 0,50% 70%,100% 0);
+border-radius:12px 12px 0 0;
+transition:.8s;
+transform-origin:top;
+}
+
+.envelope.opening::before{
+transform:rotateX(180deg);
+}
+
+.name{
+position:absolute;
+top:105px;
+width:100%;
+font-size:22
