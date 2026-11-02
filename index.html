@@ -77,4 +77,415 @@ transform:rotateX(180deg);
 position:absolute;
 top:105px;
 width:100%;
-font-size:22
+font-size:22px;
+color:#d982a8;
+font-weight:bold;
+}
+
+button{
+margin-top:30px;
+border:none;
+background:#f7bfd4;
+color:white;
+padding:13px 28px;
+border-radius:30px;
+font-size:17px;
+cursor:pointer;
+box-shadow:0 5px 18px rgba(220,130,165,.25);
+}
+
+h2{
+color:#d982a8;
+font-size:22px;
+margin-bottom:35px;
+}
+
+.stars{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:15px;
+width:100%;
+max-width:330px;
+}
+
+.star{
+font-size:38px;
+cursor:pointer;
+transition:transform .25s;
+user-select:none;
+}
+
+.star.wrong{
+animation:shake .35s;
+}
+
+.star.correct{
+animation:correctStar .8s forwards;
+}
+
+.box{
+width:270px;
+height:190px;
+background:white;
+border:3px solid #f5b6cd;
+border-radius:18px;
+box-shadow:0 10px 35px rgba(220,130,165,.18);
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.lock{
+font-size:48px;
+transition:.4s;
+}
+
+.lock.unlocked{
+transform:scale(1.25);
+}
+
+.lock.shake{
+animation:shake .4s;
+}
+
+.symbols{
+display:flex;
+gap:25px;
+margin-top:30px;
+}
+
+.symbol{
+font-size:42px;
+cursor:pointer;
+transition:.25s;
+user-select:none;
+}
+
+.symbol:active{
+transform:scale(.8);
+}
+
+.small-text{
+color:#c989a5;
+font-size:15px;
+margin-top:18px;
+}
+
+/* مرحله ۴ */
+
+#stage4{
+min-height:100vh;
+justify-content:center;
+position:relative;
+}
+
+.rose-area{
+width:230px;
+height:230px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.rose{
+position:relative;
+width:80px;
+height:180px;
+transform:scale(.2);
+opacity:0;
+animation:roseAppear 5s ease forwards;
+}
+
+.petal{
+position:absolute;
+width:65px;
+height:65px;
+background:#d7194b;
+border-radius:65% 35% 65% 35%;
+left:8px;
+top:8px;
+}
+
+.p1{transform:rotate(0deg)}
+.p2{transform:rotate(45deg)}
+.p3{transform:rotate(90deg)}
+.p4{transform:rotate(135deg)}
+.p5{transform:rotate(180deg)}
+.p6{transform:rotate(225deg)}
+.p7{transform:rotate(270deg)}
+.p8{transform:rotate(315deg)}
+
+.rose-center{
+position:absolute;
+width:38px;
+height:38px;
+background:#b90f3d;
+border-radius:50%;
+left:21px;
+top:21px;
+z-index:5;
+}
+
+.stem{
+position:absolute;
+width:7px;
+height:100px;
+background:#6f9e55;
+left:37px;
+top:70px;
+border-radius:10px;
+}
+
+.leaf{
+position:absolute;
+width:45px;
+height:20px;
+background:#78a85b;
+border-radius:100% 0;
+left:0;
+top:120px;
+transform:rotate(-25deg);
+}
+
+.sparkle{
+position:absolute;
+font-size:22px;
+opacity:0;
+animation:sparkle 2s infinite;
+}
+
+.s1{top:20px;left:25px}
+.s2{top:60px;right:20px;animation-delay:.6s}
+.s3{bottom:25px;left:25px;animation-delay:1s}
+.s4{bottom:55px;right:30px;animation-delay:1.4s}
+
+.final-text{
+opacity:0;
+color:#d982a8;
+font-size:22px;
+font-weight:bold;
+margin-top:15px;
+animation:finalText 1s ease forwards;
+animation-delay:5.5s;
+}
+
+.continue-btn{
+opacity:0;
+animation:finalText 1s ease forwards;
+animation-delay:7s;
+}
+
+@keyframes shake{
+0%,100%{transform:translateX(0)}
+25%{transform:translateX(-8px)}
+75%{transform:translateX(8px)}
+}
+
+@keyframes correctStar{
+0%{transform:scale(1)}
+50%{transform:scale(1.7)}
+100%{transform:scale(1.35)}
+}
+
+@keyframes roseAppear{
+0%{transform:scale(.2);opacity:0}
+25%{transform:scale(.35);opacity:1}
+60%{transform:scale(.75);opacity:1}
+100%{transform:scale(1);opacity:1}
+}
+
+@keyframes sparkle{
+0%,100%{opacity:0;transform:scale(.5)}
+50%{opacity:1;transform:scale(1.2)}
+}
+
+@keyframes finalText{
+to{opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<div id="stage1">
+<div class="envelope" id="envelope">
+<div class="name">برای ستایش 🤍</div>
+</div>
+<button id="openBtn">✨ بازش کن</button>
+</div>
+
+<div id="stage2" class="stage">
+<h2>خب… اولین قدم رو پیدا کن ✨</h2>
+
+<div class="stars">
+<div class="star">⭐</div>
+<div class="star">⭐</div>
+<div class="star" data-correct="true">⭐</div>
+<div class="star">⭐</div>
+<div class="star">⭐</div>
+</div>
+
+<div class="small-text">
+یکی‌شون یه کم با بقیه فرق داره… 👀
+</div>
+</div>
+
+<div id="stage3" class="stage">
+
+<h2>فکر کنم اینجا یه چیزی منتظرته…</h2>
+
+<div class="box">
+<div id="lock" class="lock">🔒</div>
+</div>
+
+<div class="small-text">
+ولی هنوز وقتش نرسیده 🤍
+</div>
+
+<div class="symbols">
+<div class="symbol" data-symbol="flower">🌸</div>
+<div class="symbol" data-symbol="star">⭐</div>
+<div class="symbol" data-symbol="heart">🩷</div>
+</div>
+
+</div>
+
+<div id="stage4" class="stage">
+
+<div class="rose-area">
+
+<div class="rose">
+
+<div class="petal p1"></div>
+<div class="petal p2"></div>
+<div class="petal p3"></div>
+<div class="petal p4"></div>
+<div class="petal p5"></div>
+<div class="petal p6"></div>
+<div class="petal p7"></div>
+<div class="petal p8"></div>
+
+<div class="rose-center"></div>
+<div class="stem"></div>
+<div class="leaf"></div>
+
+</div>
+
+<div class="sparkle s1">✦</div>
+<div class="sparkle s2">✧</div>
+<div class="sparkle s3">✦</div>
+<div class="sparkle s4">✧</div>
+
+</div>
+
+<div class="final-text">
+بالاخره پیداش کردی 🌹
+</div>
+
+<button class="continue-btn" id="continueBtn">
+💌 ادامه
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const stage1=document.getElementById("stage1");
+const stage2=document.getElementById("stage2");
+const stage3=document.getElementById("stage3");
+const stage4=document.getElementById("stage4");
+
+const envelope=document.getElementById("envelope");
+const openBtn=document.getElementById("openBtn");
+
+openBtn.addEventListener("click",()=>{
+envelope.classList.add("opening");
+openBtn.textContent="✨ آماده شد";
+
+setTimeout(()=>{
+stage1.style.display="none";
+stage2.style.display="flex";
+},1000);
+});
+
+const stars=document.querySelectorAll(".star");
+
+stars.forEach(star=>{
+star.addEventListener("click",()=>{
+
+if(star.dataset.correct==="true"){
+
+star.classList.add("correct");
+
+setTimeout(()=>{
+stage2.style.display="none";
+stage3.style.display="flex";
+},900);
+
+}else{
+
+star.classList.add("wrong");
+
+setTimeout(()=>{
+star.classList.remove("wrong");
+},400);
+
+}
+
+});
+});
+
+const symbols=document.querySelectorAll(".symbol");
+const lock=document.getElementById("lock");
+
+const correctSequence=["flower","star","heart"];
+let selectedSequence=[];
+
+symbols.forEach(symbol=>{
+symbol.addEventListener("click",()=>{
+
+selectedSequence.push(symbol.dataset.symbol);
+
+if(selectedSequence.length===3){
+
+const correct=selectedSequence.every(
+(value,index)=>value===correctSequence[index]
+);
+
+if(correct){
+
+lock.classList.add("unlocked");
+
+setTimeout(()=>{
+
+stage3.style.display="none";
+stage4.style.display="flex";
+
+},900);
+
+}else{
+
+lock.classList.add("shake");
+
+setTimeout(()=>{
+lock.classList.remove("shake");
+selectedSequence=[];
+},500);
+
+}
+
+}
+
+});
+});
+
+</script>
+
+</body>
+</html>
