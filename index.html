@@ -6,9 +6,7 @@
   <title>برای ستایش 🤍</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -33,15 +31,22 @@
       text-align: center;
     }
 
+    /* مرحله ۱ */
+    #stage1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .envelope {
       width: 270px;
       height: 180px;
-      background: #fff;
+      background: white;
       border: 3px solid #f5b6cd;
       border-radius: 15px;
       position: relative;
-      box-shadow: 0 10px 35px rgba(220, 130, 165, 0.18);
-      transition: 0.8s;
+      box-shadow: 0 10px 35px rgba(220,130,165,.18);
+      transition: .8s;
     }
 
     .envelope::before {
@@ -52,9 +57,9 @@
       width: 100%;
       height: 100px;
       background: #ffe5ef;
-      clip-path: polygon(0 0, 50% 70%, 100% 0);
+      clip-path: polygon(0 0,50% 70%,100% 0);
       border-radius: 12px 12px 0 0;
-      transition: 0.8s;
+      transition: .8s;
       transform-origin: top;
     }
 
@@ -80,17 +85,18 @@
       border-radius: 30px;
       font-size: 17px;
       cursor: pointer;
-      box-shadow: 0 5px 18px rgba(220, 130, 165, 0.25);
+      box-shadow: 0 5px 18px rgba(220,130,165,.25);
     }
 
-    .stage2 {
+    /* مرحله ۲ */
+    .stage {
       display: none;
       width: 100%;
       flex-direction: column;
       align-items: center;
     }
 
-    .stage2 h2 {
+    h2 {
       color: #d982a8;
       font-size: 22px;
       margin-bottom: 35px;
@@ -98,7 +104,7 @@
 
     .stars {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5,1fr);
       gap: 15px;
       width: 100%;
       max-width: 330px;
@@ -107,31 +113,70 @@
     .star {
       font-size: 38px;
       cursor: pointer;
-      transition: transform 0.25s, filter 0.25s;
+      transition: transform .25s;
       user-select: none;
     }
 
-    .star:hover {
-      transform: scale(1.15);
-    }
-
     .star.wrong {
-      animation: shake 0.35s;
+      animation: shake .35s;
     }
 
     .star.correct {
-      animation: correctStar 0.8s forwards;
+      animation: correctStar .8s forwards;
     }
 
-    .hint {
-      margin-top: 25px;
+    /* مرحله ۳ */
+    .box {
+      width: 270px;
+      height: 190px;
+      background: white;
+      border: 3px solid #f5b6cd;
+      border-radius: 18px;
+      box-shadow: 0 10px 35px rgba(220,130,165,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .lock {
+      font-size: 48px;
+      transition: .4s;
+    }
+
+    .lock.unlocked {
+      transform: scale(1.25);
+    }
+
+    .lock.shake {
+      animation: shake .4s;
+    }
+
+    .symbols {
+      display: flex;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .symbol {
+      font-size: 42px;
+      cursor: pointer;
+      transition: .25s;
+      user-select: none;
+    }
+
+    .symbol:active {
+      transform: scale(.8);
+    }
+
+    .small-text {
       color: #c989a5;
       font-size: 15px;
-      opacity: 0.8;
+      margin-top: 18px;
     }
 
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
+      0%,100% { transform: translateX(0); }
       25% { transform: translateX(-8px); }
       75% { transform: translateX(8px); }
     }
@@ -146,75 +191,178 @@
 
 <body>
 
-  <div class="page">
+<div class="page">
 
-    <!-- مرحله ۱ -->
-    <div id="stage1">
-      <div class="envelope" id="envelope">
-        <div class="name">برای ستایش 🤍</div>
-      </div>
-
-      <button id="openBtn">✨ بازش کن</button>
+  <!-- مرحله ۱ -->
+  <div id="stage1">
+    <div class="envelope" id="envelope">
+      <div class="name">برای ستایش 🤍</div>
     </div>
 
-    <!-- مرحله ۲ -->
-    <div class="stage2" id="stage2">
-      <h2>خب… اولین قدم رو پیدا کن ✨</h2>
+    <button id="openBtn">✨ بازش کن</button>
+  </div>
 
-      <div class="stars">
-        <div class="star">⭐</div>
-        <div class="star">⭐</div>
-        <div class="star" data-correct="true">⭐</div>
-        <div class="star">⭐</div>
-        <div class="star">⭐</div>
-      </div>
+  <!-- مرحله ۲ -->
+  <div id="stage2" class="stage">
+    <h2>خب… اولین قدم رو پیدا کن ✨</h2>
 
-      <div class="hint">
-        یکی‌شون یه کم با بقیه فرق داره… 👀
-      </div>
+    <div class="stars">
+      <div class="star">⭐</div>
+      <div class="star">⭐</div>
+      <div class="star" data-correct="true">⭐</div>
+      <div class="star">⭐</div>
+      <div class="star">⭐</div>
+    </div>
+
+    <div class="small-text">
+      یکی‌شون یه کم با بقیه فرق داره… 👀
+    </div>
+  </div>
+
+  <!-- مرحله ۳ -->
+  <div id="stage3" class="stage">
+
+    <h2>فکر کنم اینجا یه چیزی منتظرته…</h2>
+
+    <div class="box">
+      <div id="lock" class="lock">🔒</div>
+    </div>
+
+    <div class="small-text">
+      ولی هنوز وقتش نرسیده 🤍
+    </div>
+
+    <div class="symbols">
+
+      <div class="symbol" data-symbol="flower">🌸</div>
+
+      <div class="symbol" data-symbol="star">⭐</div>
+
+      <div class="symbol" data-symbol="heart">🩷</div>
+
     </div>
 
   </div>
 
-  <script>
-    const openBtn = document.getElementById("openBtn");
-    const envelope = document.getElementById("envelope");
-    const stage1 = document.getElementById("stage1");
-    const stage2 = document.getElementById("stage2");
+</div>
 
-    openBtn.addEventListener("click", () => {
-      envelope.classList.add("opening");
-      openBtn.textContent = "✨ آماده شد";
+<script>
 
-      setTimeout(() => {
-        stage1.style.display = "none";
-        stage2.style.display = "flex";
-      }, 1000);
+  const stage1 = document.getElementById("stage1");
+  const stage2 = document.getElementById("stage2");
+  const stage3 = document.getElementById("stage3");
+
+  const envelope = document.getElementById("envelope");
+  const openBtn = document.getElementById("openBtn");
+
+  /* مرحله ۱ → ۲ */
+
+  openBtn.addEventListener("click", () => {
+
+    envelope.classList.add("opening");
+
+    openBtn.textContent = "✨ آماده شد";
+
+    setTimeout(() => {
+
+      stage1.style.display = "none";
+      stage2.style.display = "flex";
+
+    }, 1000);
+
+  });
+
+
+  /* مرحله ۲ */
+
+  const stars = document.querySelectorAll(".star");
+
+  stars.forEach(star => {
+
+    star.addEventListener("click", () => {
+
+      if (star.dataset.correct === "true") {
+
+        star.classList.add("correct");
+
+        setTimeout(() => {
+
+          stage2.style.display = "none";
+          stage3.style.display = "flex";
+
+        }, 900);
+
+      } else {
+
+        star.classList.add("wrong");
+
+        setTimeout(() => {
+
+          star.classList.remove("wrong");
+
+        }, 400);
+
+      }
+
     });
 
-    const stars = document.querySelectorAll(".star");
+  });
 
-    stars.forEach((star) => {
-      star.addEventListener("click", () => {
 
-        if (star.dataset.correct === "true") {
-          star.classList.add("correct");
+  /* مرحله ۳ */
+
+  const symbols = document.querySelectorAll(".symbol");
+  const lock = document.getElementById("lock");
+
+  const correctSequence = ["flower","star","heart"];
+
+  let selectedSequence = [];
+
+
+  symbols.forEach(symbol => {
+
+    symbol.addEventListener("click", () => {
+
+      selectedSequence.push(symbol.dataset.symbol);
+
+      if (selectedSequence.length === 3) {
+
+        const correct =
+          selectedSequence.every(
+            (value,index) =>
+            value === correctSequence[index]
+          );
+
+        if (correct) {
+
+          lock.classList.add("unlocked");
 
           setTimeout(() => {
-            alert("آفرین… یکی دیگه مونده 🤍");
-          }, 700);
+
+            alert("قفل باز شد 🤍");
+
+          },500);
 
         } else {
-          star.classList.add("wrong");
+
+          lock.classList.add("shake");
 
           setTimeout(() => {
-            star.classList.remove("wrong");
-          }, 400);
+
+            lock.classList.remove("shake");
+            selectedSequence = [];
+
+          },500);
+
         }
 
-      });
+      }
+
     });
-  </script>
+
+  });
+
+</script>
 
 </body>
 </html>
