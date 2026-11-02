@@ -484,7 +484,44 @@ selectedSequence=[];
 
 });
 });
+const continueBtn = document.getElementById("continueBtn");
 
+continueBtn.addEventListener("click",()=>{
+  stage4.style.display="none";
+
+  const stage5=document.createElement("div");
+  stage5.className="stage";
+  stage5.style.display="flex";
+
+  stage5.innerHTML=`
+    <div style="
+      background:white;
+      border:3px solid #f5b6cd;
+      border-radius:20px;
+      padding:25px 20px;
+      box-shadow:0 10px 35px rgba(220,130,165,.18);
+      color:#555;
+      line-height:2;
+      font-size:16px;
+      max-width:360px;
+    ">
+      <div style="color:#d982a8;font-size:22px;font-weight:bold;margin-bottom:18px;">
+        سلام 🤗❤️
+      </div>
+
+      این چند وقت هی می‌گفتی خسته‌ای،<br>
+      منم گفتم شاید یه چیز کوچیک بتونه برای چند دقیقه حالت رو بهتر کنه :)<br><br>
+
+      برای همین سعی کردم یه چیزی درست کنم که مخصوص خودت باشه؛<br>
+      از رنگ‌هایی که دوست داری تا این رز کوچیک 🌹<br><br>
+
+      امیدوارم وقتی به آخرش رسیدی، حداقل یه لبخند روی لبت اومده باشه.<br>
+      همین برام کافیه 😅❤️
+    </div>
+  `;
+
+  document.querySelector(".page").appendChild(stage5);
+});
 </script>
 
 </body>
