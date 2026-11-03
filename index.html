@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>برای ستایش 🤍</title>
+<title>For Setayesh 🤍</title>
 
 <style>
 *{
@@ -14,14 +14,14 @@
 
 body{
   font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#fff,#fff4f8);
+  background:linear-gradient(135deg,#fff,#fff0f6,#ffe7f0);
   color:#555;
   overflow:hidden;
 }
 
 .page{
   width:100%;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -29,7 +29,7 @@ body{
 
 .stage{
   width:100%;
-  height:100vh;
+  min-height:100vh;
   display:none;
   flex-direction:column;
   justify-content:center;
@@ -38,93 +38,88 @@ body{
   padding:20px;
 }
 
-#stage1{
-  display:flex;
+#stage1{display:flex}
+
+/* STAGE 1 */
+
+.envelope-scene{
+  position:relative;
+  width:340px;
+  max-width:95vw;
+  animation:float 3s ease-in-out infinite;
 }
 
-/* ---------- STAGE 1 ---------- */
+.envelope-img{
+  display:block;
+  width:100%;
+  border-radius:24px;
+  filter:drop-shadow(0 15px 20px rgba(190,100,140,.15));
+  transition:transform 1s,opacity 1s;
+}
 
-.envelope{
-  width:280px;
-  height:190px;
-  background:white;
-  border:3px solid #f5b6cd;
-  border-radius:15px;
-  position:relative;
-  box-shadow:0 12px 35px rgba(220,130,165,.18);
+.envelope-img.opening{
+  transform:scale(1.12) translateY(-18px);
+  opacity:.15;
+}
+
+.envelope-title{
+  color:#d982a8;
+  font-size:18px;
+  margin-top:22px;
+}
+
+.open-btn,.continue-btn{
+  border:0;
+  background:linear-gradient(135deg,#f7b5ce,#e98eb2);
+  color:white;
+  padding:13px 32px;
+  border-radius:30px;
+  font-size:16px;
+  margin-top:24px;
   cursor:pointer;
+  box-shadow:0 8px 20px #e9a8c455;
   transition:.3s;
 }
 
-.envelope:hover{
-  transform:translateY(-5px);
+.open-btn:active,.continue-btn:active{
+  transform:scale(.94);
 }
 
-.envelope-flap{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  clip-path:polygon(0 0,50% 55%,100% 0);
-  background:#ffdce9;
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
 }
 
-.envelope-text{
-  position:absolute;
-  width:100%;
-  bottom:35px;
-  font-size:22px;
-  font-weight:bold;
-  color:#d982a8;
-  z-index:2;
-}
-
-.open-btn{
-  margin-top:25px;
-  border:none;
-  background:#f5b6cd;
-  color:white;
-  padding:12px 28px;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(220,130,165,.2);
-}
-
-/* ---------- STAGE 2 ---------- */
+/* STAGE 2 */
 
 .stage-title{
   color:#d982a8;
-  font-size:22px;
+  font-size:23px;
   margin-bottom:35px;
 }
 
 .stars{
   display:flex;
-  gap:18px;
+  gap:17px;
   direction:ltr;
 }
 
 .star{
-  font-size:45px;
+  font-size:43px;
   cursor:pointer;
   transition:.25s;
-  user-select:none;
 }
 
-.star:hover{
-  transform:scale(1.15);
-}
+.star:active{transform:scale(1.2)}
 
 .shake{
   animation:shake .35s;
 }
 
 @keyframes shake{
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-8px);}
-  75%{transform:translateX(8px);}
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-8px)}
+  75%{transform:translateX(8px)}
 }
 
 .correct-star{
@@ -132,43 +127,40 @@ body{
 }
 
 @keyframes correctStar{
-  50%{transform:scale(1.5);}
-  100%{transform:scale(1.2);}
+  50%{transform:scale(1.5)}
+  100%{transform:scale(1.2)}
 }
 
-/* ---------- STAGE 3 ---------- */
+/* STAGE 3 */
 
 .lock-box{
   width:320px;
   max-width:90vw;
-  background:white;
-  border:3px solid #f5b6cd;
-  border-radius:22px;
+  background:#fff;
+  border:2px solid #f5b6cd;
+  border-radius:25px;
   padding:30px 20px;
-  box-shadow:0 12px 35px rgba(220,130,165,.18);
+  box-shadow:0 12px 35px #dc82a533;
 }
 
-.lock{
-  font-size:48px;
-  margin-bottom:15px;
-}
+.lock{font-size:48px;margin-bottom:15px}
 
 .lock-title{
-  font-size:19px;
   color:#d982a8;
+  font-size:19px;
   margin-bottom:10px;
 }
 
 .lock-sub{
+  color:#999;
   font-size:14px;
   margin-bottom:25px;
-  color:#888;
 }
 
 .symbols{
   display:flex;
   justify-content:center;
-  gap:20px;
+  gap:18px;
   direction:ltr;
 }
 
@@ -176,7 +168,7 @@ body{
   width:65px;
   height:65px;
   border-radius:18px;
-  background:#fff4f8;
+  background:#fff1f6;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -186,26 +178,17 @@ body{
   transition:.2s;
 }
 
-.symbol:hover{
-  transform:scale(1.08);
-}
-
-.selected{
+.symbol.selected{
   border-color:#f5b6cd;
-  transform:scale(1.08);
+  transform:scale(1.12);
 }
 
-.reset-shake{
-  animation:shake .35s;
-}
+.reset-shake{animation:shake .35s}
 
-/* ---------- STAGE 4 ---------- */
+/* STAGE 4 */
 
 .cat-rose-area{
   position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   margin-bottom:22px;
 }
 
@@ -215,19 +198,13 @@ body{
   max-height:55vh;
   object-fit:cover;
   border-radius:24px;
-  box-shadow:0 12px 35px rgba(220,130,165,.22);
-  animation:catAppear 1.2s ease forwards;
+  box-shadow:0 12px 35px #dc82a533;
+  animation:catAppear 1.2s ease;
 }
 
 @keyframes catAppear{
-  from{
-    opacity:0;
-    transform:scale(.85);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
+  from{opacity:0;transform:scale(.8)}
+  to{opacity:1;transform:scale(1)}
 }
 
 .sparkle{
@@ -237,72 +214,30 @@ body{
   animation:sparkle 1.5s infinite;
 }
 
-.cat-s1{
-  top:5px;
-  left:8%;
-}
-
-.cat-s2{
-  top:35px;
-  right:7%;
-  animation-delay:.4s;
-}
-
-.cat-s3{
-  bottom:10px;
-  left:12%;
-  animation-delay:.8s;
-}
+.cat-s1{top:5px;left:8%}
+.cat-s2{top:35px;right:7%;animation-delay:.4s}
+.cat-s3{bottom:10px;left:12%;animation-delay:.8s}
 
 @keyframes sparkle{
-  0%,100%{
-    opacity:.3;
-    transform:scale(.8) rotate(0deg);
-  }
-  50%{
-    opacity:1;
-    transform:scale(1.2) rotate(15deg);
-  }
+  0%,100%{opacity:.3;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.3) rotate(15deg)}
 }
 
 .final-text{
-  font-size:22px;
   color:#d982a8;
+  font-size:22px;
   font-weight:bold;
-  margin-bottom:22px;
-  animation:fadeText 1s ease;
+  margin-bottom:5px;
 }
 
-@keyframes fadeText{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.continue-btn{
-  border:none;
-  background:#f5b6cd;
-  color:white;
-  padding:12px 30px;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(220,130,165,.2);
-}
-
-/* ---------- STAGE 5 ---------- */
+/* STAGE 5 */
 
 .message-card{
   background:white;
-  border:3px solid #f5b6cd;
-  border-radius:22px;
+  border:2px solid #f5b6cd;
+  border-radius:24px;
   padding:27px 22px;
-  box-shadow:0 12px 35px rgba(220,130,165,.18);
+  box-shadow:0 12px 35px #dc82a533;
   color:#555;
   line-height:2;
   font-size:16px;
@@ -310,22 +245,16 @@ body{
   animation:cardAppear 1s ease;
 }
 
-@keyframes cardAppear{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
 .message-title{
   color:#d982a8;
   font-size:23px;
   font-weight:bold;
   margin-bottom:18px;
+}
+
+@keyframes cardAppear{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
 }
 </style>
 </head>
@@ -337,12 +266,22 @@ body{
 <!-- STAGE 1 -->
 <div id="stage1" class="stage">
 
-  <div class="envelope" id="envelope">
-    <div class="envelope-flap"></div>
-    <div class="envelope-text">برای ستایش 🤍</div>
+  <div class="envelope-scene">
+    <img
+      id="envelopeImg"
+      class="envelope-img"
+      src="IMG_20261103_170120.jpg"
+      alt="Setayesh envelope"
+    >
   </div>
 
-  <button class="open-btn" id="openBtn">✨ بازش کن</button>
+  <div class="envelope-title">
+    یه چیز کوچیک برای تو 🤍
+  </div>
+
+  <button class="open-btn" id="openBtn">
+    ✨ بازش کن
+  </button>
 
 </div>
 
@@ -430,13 +369,16 @@ body{
 
     این چند وقت هی می‌گفتی خسته‌ای،
     منم گفتم شاید یه چیز کوچیک بتونه برای چند دقیقه حالت رو بهتر کنه :)
+
     <br><br>
 
     برای همین سعی کردم یه چیزی درست کنم که مخصوص خودت باشه؛
     از رنگ‌هایی که دوست داری تا این رز کوچیک 🌹
+
     <br><br>
 
     امیدوارم وقتی به آخرش رسیدی، حداقل یه لبخند روی لبت اومده باشه.
+
     <br>
 
     همین برام کافیه 😅❤️
@@ -450,30 +392,39 @@ body{
 
 <script>
 
-/* ---------- HELPERS ---------- */
+/* GENERAL */
 
-function showStage(stageNumber){
-
+function showStage(number){
   document.querySelectorAll(".stage").forEach(stage=>{
     stage.style.display="none";
   });
 
-  document.getElementById("stage"+stageNumber).style.display="flex";
+  document.getElementById("stage"+number).style.display="flex";
 }
 
 
-/* ---------- STAGE 1 ---------- */
+/* STAGE 1 */
+
+let opened=false;
 
 document.getElementById("openBtn").addEventListener("click",()=>{
-  showStage(2);
+
+  if(opened)return;
+  opened=true;
+
+  const img=document.getElementById("envelopeImg");
+  img.classList.add("opening");
+
+  document.getElementById("openBtn").textContent="💌 در حال باز شدن...";
+
+  setTimeout(()=>{
+    showStage(2);
+  },1100);
+
 });
 
-document.getElementById("envelope").addEventListener("click",()=>{
-  showStage(2);
-});
 
-
-/* ---------- STAGE 2 ---------- */
+/* STAGE 2 */
 
 const stars=document.querySelectorAll(".star");
 
@@ -492,10 +443,9 @@ stars.forEach((star,index)=>{
     }else{
 
       star.classList.remove("shake");
-
       void star.offsetWidth;
-
       star.classList.add("shake");
+
     }
 
   });
@@ -503,15 +453,11 @@ stars.forEach((star,index)=>{
 });
 
 
-/* ---------- STAGE 3 ---------- */
+/* STAGE 3 */
 
 const symbols=document.querySelectorAll(".symbol");
 
-const correctSequence=[
-  "flower",
-  "star",
-  "heart"
-];
+const correctSequence=["flower","star","heart"];
 
 let selectedSequence=[];
 
@@ -527,19 +473,19 @@ symbols.forEach(symbol=>{
 
     setTimeout(()=>{
       symbol.classList.remove("selected");
-    },250);
+    },300);
 
-    const currentIndex=selectedSequence.length-1;
+    const index=selectedSequence.length-1;
 
-    if(value!==correctSequence[currentIndex]){
+    if(value!==correctSequence[index]){
 
       selectedSequence=[];
 
-      document.querySelector(".lock-box").classList.remove("reset-shake");
+      const box=document.querySelector(".lock-box");
 
-      void document.querySelector(".lock-box").offsetWidth;
-
-      document.querySelector(".lock-box").classList.add("reset-shake");
+      box.classList.remove("reset-shake");
+      void box.offsetWidth;
+      box.classList.add("reset-shake");
 
       return;
     }
@@ -559,7 +505,7 @@ symbols.forEach(symbol=>{
 });
 
 
-/* ---------- STAGE 4 ---------- */
+/* STAGE 4 */
 
 document.getElementById("continueBtn").addEventListener("click",()=>{
   showStage(5);
