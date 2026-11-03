@@ -6,303 +6,326 @@
 <title>برای ستایش 🤍</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-margin:0;
-min-height:100vh;
-background:linear-gradient(135deg,#fff,#fff4f8);
-font-family:sans-serif;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#fff,#fff4f8);
+  color:#555;
+  overflow:hidden;
 }
 
 .page{
-width:100%;
-max-width:430px;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-padding:25px;
-text-align:center;
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .stage{
-display:none;
-width:100%;
-flex-direction:column;
-align-items:center;
+  width:100%;
+  height:100vh;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
 }
 
 #stage1{
-display:flex;
-flex-direction:column;
-align-items:center;
+  display:flex;
 }
+
+/* ---------- STAGE 1 ---------- */
 
 .envelope{
-width:270px;
-height:180px;
-background:white;
-border:3px solid #f5b6cd;
-border-radius:15px;
-position:relative;
-box-shadow:0 10px 35px rgba(220,130,165,.18);
-transition:.8s;
+  width:280px;
+  height:190px;
+  background:white;
+  border:3px solid #f5b6cd;
+  border-radius:15px;
+  position:relative;
+  box-shadow:0 12px 35px rgba(220,130,165,.18);
+  cursor:pointer;
+  transition:.3s;
 }
 
-.envelope::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100px;
-background:#ffe5ef;
-clip-path:polygon(0 0,50% 70%,100% 0);
-border-radius:12px 12px 0 0;
-transition:.8s;
-transform-origin:top;
+.envelope:hover{
+  transform:translateY(-5px);
 }
 
-.envelope.opening::before{
-transform:rotateX(180deg);
+.envelope-flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  clip-path:polygon(0 0,50% 55%,100% 0);
+  background:#ffdce9;
 }
 
-.name{
-position:absolute;
-top:105px;
-width:100%;
-font-size:22px;
-color:#d982a8;
-font-weight:bold;
+.envelope-text{
+  position:absolute;
+  width:100%;
+  bottom:35px;
+  font-size:22px;
+  font-weight:bold;
+  color:#d982a8;
+  z-index:2;
 }
 
-button{
-margin-top:30px;
-border:none;
-background:#f7bfd4;
-color:white;
-padding:13px 28px;
-border-radius:30px;
-font-size:17px;
-cursor:pointer;
-box-shadow:0 5px 18px rgba(220,130,165,.25);
+.open-btn{
+  margin-top:25px;
+  border:none;
+  background:#f5b6cd;
+  color:white;
+  padding:12px 28px;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(220,130,165,.2);
 }
 
-h2{
-color:#d982a8;
-font-size:22px;
-margin-bottom:35px;
+/* ---------- STAGE 2 ---------- */
+
+.stage-title{
+  color:#d982a8;
+  font-size:22px;
+  margin-bottom:35px;
 }
 
 .stars{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:15px;
-width:100%;
-max-width:330px;
+  display:flex;
+  gap:18px;
+  direction:ltr;
 }
 
 .star{
-font-size:38px;
-cursor:pointer;
-transition:transform .25s;
-user-select:none;
+  font-size:45px;
+  cursor:pointer;
+  transition:.25s;
+  user-select:none;
 }
 
-.star.wrong{
-animation:shake .35s;
+.star:hover{
+  transform:scale(1.15);
 }
 
-.star.correct{
-animation:correctStar .8s forwards;
-}
-
-.box{
-width:270px;
-height:190px;
-background:white;
-border:3px solid #f5b6cd;
-border-radius:18px;
-box-shadow:0 10px 35px rgba(220,130,165,.18);
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-}
-
-.lock{
-font-size:48px;
-transition:.4s;
-}
-
-.lock.unlocked{
-transform:scale(1.25);
-}
-
-.lock.shake{
-animation:shake .4s;
-}
-
-.symbols{
-display:flex;
-gap:25px;
-margin-top:30px;
-}
-
-.symbol{
-font-size:42px;
-cursor:pointer;
-transition:.25s;
-user-select:none;
-}
-
-.symbol:active{
-transform:scale(.8);
-}
-
-.small-text{
-color:#c989a5;
-font-size:15px;
-margin-top:18px;
-}
-
-/* مرحله ۴ */
-
-#stage4{
-min-height:100vh;
-justify-content:center;
-position:relative;
-}
-
-.rose-area{
-width:230px;
-height:230px;
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.rose{
-position:relative;
-width:80px;
-height:180px;
-transform:scale(.2);
-opacity:0;
-animation:roseAppear 5s ease forwards;
-}
-
-.petal{
-position:absolute;
-width:65px;
-height:65px;
-background:#d7194b;
-border-radius:65% 35% 65% 35%;
-left:8px;
-top:8px;
-}
-
-.p1{transform:rotate(0deg)}
-.p2{transform:rotate(45deg)}
-.p3{transform:rotate(90deg)}
-.p4{transform:rotate(135deg)}
-.p5{transform:rotate(180deg)}
-.p6{transform:rotate(225deg)}
-.p7{transform:rotate(270deg)}
-.p8{transform:rotate(315deg)}
-
-.rose-center{
-position:absolute;
-width:38px;
-height:38px;
-background:#b90f3d;
-border-radius:50%;
-left:21px;
-top:21px;
-z-index:5;
-}
-
-.stem{
-position:absolute;
-width:7px;
-height:100px;
-background:#6f9e55;
-left:37px;
-top:70px;
-border-radius:10px;
-}
-
-.leaf{
-position:absolute;
-width:45px;
-height:20px;
-background:#78a85b;
-border-radius:100% 0;
-left:0;
-top:120px;
-transform:rotate(-25deg);
-}
-
-.sparkle{
-position:absolute;
-font-size:22px;
-opacity:0;
-animation:sparkle 2s infinite;
-}
-
-.s1{top:20px;left:25px}
-.s2{top:60px;right:20px;animation-delay:.6s}
-.s3{bottom:25px;left:25px;animation-delay:1s}
-.s4{bottom:55px;right:30px;animation-delay:1.4s}
-
-.final-text{
-opacity:0;
-color:#d982a8;
-font-size:22px;
-font-weight:bold;
-margin-top:15px;
-animation:finalText 1s ease forwards;
-animation-delay:5.5s;
-}
-
-.continue-btn{
-opacity:0;
-animation:finalText 1s ease forwards;
-animation-delay:7s;
+.shake{
+  animation:shake .35s;
 }
 
 @keyframes shake{
-0%,100%{transform:translateX(0)}
-25%{transform:translateX(-8px)}
-75%{transform:translateX(8px)}
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-8px);}
+  75%{transform:translateX(8px);}
+}
+
+.correct-star{
+  animation:correctStar .7s forwards;
 }
 
 @keyframes correctStar{
-0%{transform:scale(1)}
-50%{transform:scale(1.7)}
-100%{transform:scale(1.35)}
+  50%{transform:scale(1.5);}
+  100%{transform:scale(1.2);}
 }
 
-@keyframes roseAppear{
-0%{transform:scale(.2);opacity:0}
-25%{transform:scale(.35);opacity:1}
-60%{transform:scale(.75);opacity:1}
-100%{transform:scale(1);opacity:1}
+/* ---------- STAGE 3 ---------- */
+
+.lock-box{
+  width:320px;
+  max-width:90vw;
+  background:white;
+  border:3px solid #f5b6cd;
+  border-radius:22px;
+  padding:30px 20px;
+  box-shadow:0 12px 35px rgba(220,130,165,.18);
+}
+
+.lock{
+  font-size:48px;
+  margin-bottom:15px;
+}
+
+.lock-title{
+  font-size:19px;
+  color:#d982a8;
+  margin-bottom:10px;
+}
+
+.lock-sub{
+  font-size:14px;
+  margin-bottom:25px;
+  color:#888;
+}
+
+.symbols{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  direction:ltr;
+}
+
+.symbol{
+  width:65px;
+  height:65px;
+  border-radius:18px;
+  background:#fff4f8;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:32px;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:.2s;
+}
+
+.symbol:hover{
+  transform:scale(1.08);
+}
+
+.selected{
+  border-color:#f5b6cd;
+  transform:scale(1.08);
+}
+
+.reset-shake{
+  animation:shake .35s;
+}
+
+/* ---------- STAGE 4 ---------- */
+
+.cat-rose-area{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.cat-rose-img{
+  width:300px;
+  max-width:85vw;
+  max-height:55vh;
+  object-fit:cover;
+  border-radius:24px;
+  box-shadow:0 12px 35px rgba(220,130,165,.22);
+  animation:catAppear 1.2s ease forwards;
+}
+
+@keyframes catAppear{
+  from{
+    opacity:0;
+    transform:scale(.85);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.sparkle{
+  position:absolute;
+  color:#e99abb;
+  font-size:25px;
+  animation:sparkle 1.5s infinite;
+}
+
+.cat-s1{
+  top:5px;
+  left:8%;
+}
+
+.cat-s2{
+  top:35px;
+  right:7%;
+  animation-delay:.4s;
+}
+
+.cat-s3{
+  bottom:10px;
+  left:12%;
+  animation-delay:.8s;
 }
 
 @keyframes sparkle{
-0%,100%{opacity:0;transform:scale(.5)}
-50%{opacity:1;transform:scale(1.2)}
+  0%,100%{
+    opacity:.3;
+    transform:scale(.8) rotate(0deg);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.2) rotate(15deg);
+  }
 }
 
-@keyframes finalText{
-to{opacity:1}
+.final-text{
+  font-size:22px;
+  color:#d982a8;
+  font-weight:bold;
+  margin-bottom:22px;
+  animation:fadeText 1s ease;
+}
+
+@keyframes fadeText{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.continue-btn{
+  border:none;
+  background:#f5b6cd;
+  color:white;
+  padding:12px 30px;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(220,130,165,.2);
+}
+
+/* ---------- STAGE 5 ---------- */
+
+.message-card{
+  background:white;
+  border:3px solid #f5b6cd;
+  border-radius:22px;
+  padding:27px 22px;
+  box-shadow:0 12px 35px rgba(220,130,165,.18);
+  color:#555;
+  line-height:2;
+  font-size:16px;
+  max-width:380px;
+  animation:cardAppear 1s ease;
+}
+
+@keyframes cardAppear{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.message-title{
+  color:#d982a8;
+  font-size:23px;
+  font-weight:bold;
+  margin-bottom:18px;
 }
 </style>
 </head>
@@ -311,221 +334,237 @@ to{opacity:1}
 
 <div class="page">
 
-<div id="stage1">
-<div class="envelope" id="envelope">
-<div class="name">برای ستایش 🤍</div>
-</div>
-<button id="openBtn">✨ بازش کن</button>
+<!-- STAGE 1 -->
+<div id="stage1" class="stage">
+
+  <div class="envelope" id="envelope">
+    <div class="envelope-flap"></div>
+    <div class="envelope-text">برای ستایش 🤍</div>
+  </div>
+
+  <button class="open-btn" id="openBtn">✨ بازش کن</button>
+
 </div>
 
+
+<!-- STAGE 2 -->
 <div id="stage2" class="stage">
-<h2>خب… اولین قدم رو پیدا کن ✨</h2>
 
-<div class="stars">
-<div class="star">⭐</div>
-<div class="star">⭐</div>
-<div class="star" data-correct="true">⭐</div>
-<div class="star">⭐</div>
-<div class="star">⭐</div>
+  <div class="stage-title">
+    خب… اولین قدم رو پیدا کن ✨
+  </div>
+
+  <div class="stars">
+    <div class="star">⭐</div>
+    <div class="star">⭐</div>
+    <div class="star">⭐</div>
+    <div class="star">⭐</div>
+    <div class="star">⭐</div>
+  </div>
+
 </div>
 
-<div class="small-text">
-یکی‌شون یه کم با بقیه فرق داره… 👀
-</div>
-</div>
 
+<!-- STAGE 3 -->
 <div id="stage3" class="stage">
 
-<h2>فکر کنم اینجا یه چیزی منتظرته…</h2>
+  <div class="lock-box">
 
-<div class="box">
-<div id="lock" class="lock">🔒</div>
+    <div class="lock">🔒</div>
+
+    <div class="lock-title">
+      فکر کنم اینجا یه چیزی منتظرته…
+    </div>
+
+    <div class="lock-sub">
+      ولی هنوز وقتش نرسیده 🤍
+    </div>
+
+    <div class="symbols">
+      <div class="symbol" data-symbol="flower">🌸</div>
+      <div class="symbol" data-symbol="star">⭐</div>
+      <div class="symbol" data-symbol="heart">🩷</div>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="small-text">
-ولی هنوز وقتش نرسیده 🤍
-</div>
 
-<div class="symbols">
-<div class="symbol" data-symbol="flower">🌸</div>
-<div class="symbol" data-symbol="star">⭐</div>
-<div class="symbol" data-symbol="heart">🩷</div>
-</div>
-
-</div>
-
+<!-- STAGE 4 -->
 <div id="stage4" class="stage">
-<div id="stage4" class="stage">
+
   <div class="cat-rose-area">
-    <img src="IMG_20261103_154038.jpg" class="cat-rose-img">
+
+    <img
+      src="IMG_20261103_154038.jpg"
+      class="cat-rose-img"
+      alt="گربه با رز"
+    >
 
     <div class="sparkle cat-s1">✦</div>
     <div class="sparkle cat-s2">✦</div>
     <div class="sparkle cat-s3">✦</div>
+
   </div>
 
-  <div class="final-text">بالاخره پیداش کردی 🌹</div>
+  <div class="final-text">
+    بالاخره پیداش کردی 🌹
+  </div>
 
-  <button class="continue-btn" id="continueBtn">💌 ادامه</button>
+  <button class="continue-btn" id="continueBtn">
+    💌 ادامه
+  </button>
+
 </div>
-  <style>
-.cat-rose-area{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-bottom:20px;
-}
 
-.cat-rose-img{
-  width:280px;
-  max-width:85vw;
-  border-radius:24px;
-  box-shadow:0 12px 35px rgba(220,130,165,.22);
-  animation:catAppear 1.2s ease forwards;
-}
 
-@keyframes catAppear{
-  from{opacity:0;transform:scale(.85);}
-  to{opacity:1;transform:scale(1);}
-}
+<!-- STAGE 5 -->
+<div id="stage5" class="stage">
 
-.cat-s1,.cat-s2,.cat-s3{
-  position:absolute;
-  animation:sparkle 1.5s infinite;
-}
+  <div class="message-card">
 
-.cat-s1{top:5px;left:15%;}
-.cat-s2{top:35px;right:12%;}
-.cat-s3{bottom:10px;left:10%;}
-  </style>
+    <div class="message-title">
+      سلام 🤗❤️
+    </div>
+
+    این چند وقت هی می‌گفتی خسته‌ای،
+    منم گفتم شاید یه چیز کوچیک بتونه برای چند دقیقه حالت رو بهتر کنه :)
+    <br><br>
+
+    برای همین سعی کردم یه چیزی درست کنم که مخصوص خودت باشه؛
+    از رنگ‌هایی که دوست داری تا این رز کوچیک 🌹
+    <br><br>
+
+    امیدوارم وقتی به آخرش رسیدی، حداقل یه لبخند روی لبت اومده باشه.
+    <br>
+
+    همین برام کافیه 😅❤️
+
+  </div>
+
+</div>
+
+</div>
+
+
 <script>
-const stage1=document.getElementById("stage1");
-const stage2=document.getElementById("stage2");
-const stage3=document.getElementById("stage3");
-const stage4=document.getElementById("stage4");
 
-const envelope=document.getElementById("envelope");
-const openBtn=document.getElementById("openBtn");
+/* ---------- HELPERS ---------- */
 
-openBtn.addEventListener("click",()=>{
-envelope.classList.add("opening");
-openBtn.textContent="✨ آماده شد";
+function showStage(stageNumber){
 
-setTimeout(()=>{
-stage1.style.display="none";
-stage2.style.display="flex";
-},1000);
+  document.querySelectorAll(".stage").forEach(stage=>{
+    stage.style.display="none";
+  });
+
+  document.getElementById("stage"+stageNumber).style.display="flex";
+}
+
+
+/* ---------- STAGE 1 ---------- */
+
+document.getElementById("openBtn").addEventListener("click",()=>{
+  showStage(2);
 });
+
+document.getElementById("envelope").addEventListener("click",()=>{
+  showStage(2);
+});
+
+
+/* ---------- STAGE 2 ---------- */
 
 const stars=document.querySelectorAll(".star");
 
-stars.forEach(star=>{
-star.addEventListener("click",()=>{
+stars.forEach((star,index)=>{
 
-if(star.dataset.correct==="true"){
+  star.addEventListener("click",()=>{
 
-star.classList.add("correct");
+    if(index===2){
 
-setTimeout(()=>{
-stage2.style.display="none";
-stage3.style.display="flex";
-},900);
+      star.classList.add("correct-star");
 
-}else{
+      setTimeout(()=>{
+        showStage(3);
+      },700);
 
-star.classList.add("wrong");
+    }else{
 
-setTimeout(()=>{
-star.classList.remove("wrong");
-},400);
+      star.classList.remove("shake");
 
-}
+      void star.offsetWidth;
+
+      star.classList.add("shake");
+    }
+
+  });
 
 });
-});
+
+
+/* ---------- STAGE 3 ---------- */
 
 const symbols=document.querySelectorAll(".symbol");
-const lock=document.getElementById("lock");
 
-const correctSequence=["flower","star","heart"];
+const correctSequence=[
+  "flower",
+  "star",
+  "heart"
+];
+
 let selectedSequence=[];
 
 symbols.forEach(symbol=>{
-symbol.addEventListener("click",()=>{
 
-selectedSequence.push(symbol.dataset.symbol);
+  symbol.addEventListener("click",()=>{
 
-if(selectedSequence.length===3){
+    const value=symbol.dataset.symbol;
 
-const correct=selectedSequence.every(
-(value,index)=>value===correctSequence[index]
-);
+    selectedSequence.push(value);
 
-if(correct){
+    symbol.classList.add("selected");
 
-lock.classList.add("unlocked");
+    setTimeout(()=>{
+      symbol.classList.remove("selected");
+    },250);
 
-setTimeout(()=>{
+    const currentIndex=selectedSequence.length-1;
 
-stage3.style.display="none";
-stage4.style.display="flex";
+    if(value!==correctSequence[currentIndex]){
 
-},900);
+      selectedSequence=[];
 
-}else{
+      document.querySelector(".lock-box").classList.remove("reset-shake");
 
-lock.classList.add("shake");
+      void document.querySelector(".lock-box").offsetWidth;
 
-setTimeout(()=>{
-lock.classList.remove("shake");
-selectedSequence=[];
-},500);
+      document.querySelector(".lock-box").classList.add("reset-shake");
 
-}
+      return;
+    }
 
-}
+    if(selectedSequence.length===correctSequence.length){
+
+      selectedSequence=[];
+
+      setTimeout(()=>{
+        showStage(4);
+      },500);
+
+    }
+
+  });
 
 });
+
+
+/* ---------- STAGE 4 ---------- */
+
+document.getElementById("continueBtn").addEventListener("click",()=>{
+  showStage(5);
 });
-const continueBtn = document.getElementById("continueBtn");
 
-continueBtn.addEventListener("click",()=>{
-  stage4.style.display="none";
-
-  const stage5=document.createElement("div");
-  stage5.className="stage";
-  stage5.style.display="flex";
-
-  stage5.innerHTML=`
-    <div style="
-      background:white;
-      border:3px solid #f5b6cd;
-      border-radius:20px;
-      padding:25px 20px;
-      box-shadow:0 10px 35px rgba(220,130,165,.18);
-      color:#555;
-      line-height:2;
-      font-size:16px;
-      max-width:360px;
-    ">
-      <div style="color:#d982a8;font-size:22px;font-weight:bold;margin-bottom:18px;">
-        سلام 🤗❤️
-      </div>
-
-      این چند وقت هی می‌گفتی خسته‌ای،<br>
-      منم گفتم شاید یه چیز کوچیک بتونه برای چند دقیقه حالت رو بهتر کنه :)<br><br>
-
-      برای همین سعی کردم یه چیزی درست کنم که مخصوص خودت باشه؛<br>
-      از رنگ‌هایی که دوست داری تا این رز کوچیک 🌹<br><br>
-
-      امیدوارم وقتی به آخرش رسیدی، حداقل یه لبخند روی لبت اومده باشه.<br>
-      همین برام کافیه 😅❤️
-    </div>
-  `;
-
-  document.querySelector(".page").appendChild(stage5);
-});
 </script>
 
 </body>
